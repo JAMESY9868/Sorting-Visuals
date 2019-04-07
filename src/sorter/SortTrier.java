@@ -21,6 +21,7 @@ public final class SortTrier implements Sorter<Element, MonitoredArray> {
 
         // end timer
         long tend = System.currentTimeMillis();
+        ali.neutralColor();
 
         // calculate time
         long total = tend - tstart;
@@ -31,10 +32,11 @@ public final class SortTrier implements Sorter<Element, MonitoredArray> {
         long only = total - swap - compare;
 
         // report data
-        System.out.println("Time spent (ms): " + only);
-        System.out.println("Including sleep (ms): " + total);
-        System.out.println("Swap used: " + ali.getSwap());
-        System.out.println("Compare used: " + ali.getCompare());
+        Const.out.println("Time spent (ms): " + only);
+        Const.out.println("Including sleep (ms): " + total);
+        Const.out.println("Swap used: " + ali.getSwap());
+        Const.out.println("Compare used: " + ali.getCompare());
+        Const.out.println();
 
         // return data
         return ali;

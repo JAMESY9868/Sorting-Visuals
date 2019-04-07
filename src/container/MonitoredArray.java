@@ -2,6 +2,7 @@ package container;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import graph.Line;
@@ -23,31 +24,34 @@ public final class MonitoredArray extends ArrayList<Element> implements Repainte
             add(new Element(ali.get(i), new Line(ali.get(i), i), this));
     }
 
-    public static <Item> void swap(ArrayList<Item> _ale, int i, int j) {
-        @SuppressWarnings("unchecked")
-        ArrayList<Element> ale = (ArrayList<Element>) _ale;
+    public static void swap(ArrayList<Element> ale, int i, int j) {
+        swap(ale, i, ale, j, 0);
+    }
 
+    public static void swap(ArrayList<Element> ale1, int i, ArrayList<Element> ale2, int j, int ale2Offset) {
         // temp elements
-        Element tmp1 = ale.get(i), tmp2 = ale.get(j);
+        Element tmp1 = ale1.get(i), tmp2 = ale2.get(j);
 
         // colors
-        Color c1 = tmp1.swapLineColor(swpC), c2 = tmp2.swapLineColor(swpC);
+        tmp1.setLineColor(swpC);
+        tmp2.setLineColor(swpC);
 
         // set element
-        ale.set(i, tmp2);
-        ale.set(j, tmp1);
+        ale1.set(i, tmp2);
+        ale2.set(j, tmp1);
 
         // swap Line
-        tmp1.moveLine(j);
+        if (ale1 == ale2)
+            tmp1.moveLine(j + ale2Offset);
         tmp2.moveLine(i);
 
         // return their colors
-        tmp1.swapLineColor(c1);
-        tmp2.swapLineColor(c2);
+        tmp1.neutralColor();
+        tmp2.neutralColor();
 
         // update counter when class is MonitoredArray
-        if (_ale.getClass() == MonitoredArray.class)
-            ((MonitoredArray) _ale).swapped();
+        if (ale1.getClass() == MonitoredArray.class)
+            ((MonitoredArray) ale1).swapped();
     }
 
     @SuppressWarnings("unused")
@@ -88,4 +92,15 @@ public final class MonitoredArray extends ArrayList<Element> implements Repainte
             e.repaint(g);
     }
 
+    public void put(PrintStream ps) {
+        ps.printf("[");
+        for (Element e : this)
+            ps.printf("%d ", e.getItem());
+        ps.printf("\b]\n");
+    }
+
+    public void neutralColor() {
+        for (Element e : this)
+            e.neutralColor();
+    }
 }

@@ -1,1 +1,6 @@
+# eclipse related
 bin/
+
+# project related debug files
+out.log
+err.log

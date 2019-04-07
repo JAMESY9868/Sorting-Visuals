@@ -6,10 +6,6 @@ import container.Element;
 import container.MonitoredArray;
 
 public class BubbleSort<Arr extends ArrayList<Element>> implements Sorter<Element, Arr> {
-
-    public BubbleSort() {
-    }
-
     @Override
     public Arr sort(Arr arr) {
         // end index

@@ -27,6 +27,10 @@ public final class SortPanel extends JPanel {
 
         // field setup
         r = new Random(865167375);
+        mai = null;
+    }
+
+    private void newArray() {
         mai = new MonitoredArray(shuffledIntegers(Const.WIDTH));
     }
 
@@ -47,8 +51,16 @@ public final class SortPanel extends JPanel {
         mai.repaint((Graphics2D) g);
     }
 
+    /**
+     * generates a new array for each sort-trials
+     * 
+     * @param st
+     */
     public void sort(SortTrier st) {
+        newArray();
+        mai.put(Const.err);
         st.sort(mai);
+        mai.put(Const.err);
     }
 
 }

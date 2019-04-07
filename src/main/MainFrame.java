@@ -1,11 +1,16 @@
 package main;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
 import javax.swing.JFrame;
 
 import container.Element;
 import container.MonitoredArray;
 import graph.Line;
 import sorter.BubbleSort;
+import sorter.MergeSort;
 import sorter.SortTrier;
 
 @SuppressWarnings("serial")
@@ -37,11 +42,25 @@ public final class MainFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        MainFrame mf = new MainFrame();
+        try (PrintStream out = new PrintStream(new FileOutputStream("out.log", false));
+                PrintStream err = new PrintStream(new FileOutputStream("err.log", false))) {
 
-        mf.update();
+            Const.out = out;
+            Const.err = err;
 
-        // sort
-        mf.sp.sort(new SortTrier(new BubbleSort<MonitoredArray>()));
+            MainFrame mf = new MainFrame();
+
+            mf.update();
+
+            // bubble sort
+            mf.sp.sort(new SortTrier(new BubbleSort<MonitoredArray>()));
+
+            // merge sort
+            mf.sp.sort(new SortTrier(new MergeSort<MonitoredArray>()));
+
+        } catch (IOException e) {
+            System.err.println("IO Error. Exiting. ");
+            System.exit(-1);
+        }
     }
 }

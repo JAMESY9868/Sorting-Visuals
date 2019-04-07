@@ -15,7 +15,7 @@ public class Element implements Comparable<Element>, Repainter {
 
     public static JPanel p;
 
-    private static final Color C1 = Color.GREEN, C2 = Color.RED;
+    private static final Color C1 = Color.RED, C2 = Color.RED;
 
     Element(Integer item, Line _line, MonitoredArray mai) {
         this.item = item;
@@ -26,14 +26,17 @@ public class Element implements Comparable<Element>, Repainter {
     @Override
     public int compareTo(Element o) {
         // set color
-        Color c1 = line.swapColor(C1), c2 = o.line.swapColor(C2);
+        final Color c1 = swapLineColor(C1), c2 = o.swapLineColor(C2);
 
         // stores result
         int cmp = item.compareTo(o.item);
 
+        // repaint
+        p.repaint();
+
         // line repaints
-        line.swapColor(c1);
-        o.line.swapColor(c2);
+        swapLineColor(c1);
+        o.swapLineColor(c2);
 
         // update counters
         mai.compared();
@@ -55,4 +58,20 @@ public class Element implements Comparable<Element>, Repainter {
         line.moveTo(x);
     }
 
+    public Integer getItem() {
+        return item;
+    }
+
+    public void neutralColor() {
+        swapLineColor(Line.neutral);
+    }
+
+    public Color getLineColor() {
+        return line.getColor();
+    }
+
+    public void setLineColor(Color c) {
+        line.setColor(c);
+        p.repaint();
+    }
 }
