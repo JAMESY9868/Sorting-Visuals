@@ -13,6 +13,7 @@ import sorter.AlgoSorter;
 import sorter.BubbleSort;
 import sorter.MergeSort;
 import sorter.QuickSort;
+import sorter.SelectionSort;
 import sorter.SortTrier;
 
 @SuppressWarnings("serial")
@@ -61,7 +62,10 @@ public final class MainFrame extends JFrame {
             // mf.sorts(1);
 
             // quick sort
-            mf.sorts(2);
+            // mf.sorts(2);
+
+            // selection sort
+            mf.sorts(3);
 
         } catch (IOException e) {
             System.err.println("IO Error. Exiting. ");
@@ -89,6 +93,8 @@ public final class MainFrame extends JFrame {
             return new MergeSort<MonitoredArray>();
             case 2:
             return new QuickSort<MonitoredArray>();
+            case 3:
+            return new SelectionSort<MonitoredArray>();
             default:
             return null;
         }
