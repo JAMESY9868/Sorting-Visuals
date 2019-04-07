@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import container.Element;
 import container.MonitoredArray;
 
-public final class MergeSort<Arr extends ArrayList<Element>> implements Sorter<Element, Arr> {
+public final class MergeSort<Arr extends ArrayList<Element>> implements AlgoSorter<Arr> {
 
     @Override
     public Arr sort(Arr arr) {

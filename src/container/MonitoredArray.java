@@ -24,10 +24,31 @@ public final class MonitoredArray extends ArrayList<Element> implements Repainte
             add(new Element(ali.get(i), new Line(ali.get(i), i), this));
     }
 
+    /**
+     * This method swaps the two elements at given indices within the array. <br/>
+     * If the input array is a MonitoredArray, additionally updates status of the
+     * array.
+     * 
+     * @param ale the array
+     * @param i first index
+     * @param j second index
+     */
     public static void swap(ArrayList<Element> ale, int i, int j) {
         swap(ale, i, ale, j, 0);
     }
 
+    /**
+     * This method swaps ale1[i] with ale2[j], assuming ale2 is a subarray of ale1
+     * (otherwise behaviors undefined). <br/>
+     * If ale1 is a MonitoredArray, additionally updates its status.
+     * 
+     * @param ale1 first array
+     * @param i first index
+     * @param ale2 second array, presumably subarray of ale1
+     * @param j second index
+     * @param ale2Offset the offset value of ale2 to ale1. i.e., ale2[0] equivalent
+     * to ale1[ale2Offset]. If negative, then ale2 is not subarray of ale1.
+     */
     public static void swap(ArrayList<Element> ale1, int i, ArrayList<Element> ale2, int j, int ale2Offset) {
         // temp elements
         Element tmp1 = ale1.get(i), tmp2 = ale2.get(j);
@@ -41,7 +62,7 @@ public final class MonitoredArray extends ArrayList<Element> implements Repainte
         ale2.set(j, tmp1);
 
         // swap Line
-        if (ale1 == ale2)
+        if (ale1 == ale2 && ale2Offset >= 0)
             tmp1.moveLine(j + ale2Offset);
         tmp2.moveLine(i);
 

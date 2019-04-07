@@ -5,14 +5,18 @@ import container.MonitoredArray;
 import main.Const;
 
 public final class SortTrier implements Sorter<Element, MonitoredArray> {
-    Sorter<Element, MonitoredArray> sorter;
+    AlgoSorter<MonitoredArray> sorter;
 
-    public SortTrier(Sorter<Element, MonitoredArray> s) {
+    public SortTrier(AlgoSorter<MonitoredArray> s) {
         sorter = s;
     }
 
     @Override
     public MonitoredArray sort(MonitoredArray arr) {
+        // if sorter is empty, do nothing and return
+        if (null == sorter)
+            return null;
+
         // start timer
         long tstart = System.currentTimeMillis();
 

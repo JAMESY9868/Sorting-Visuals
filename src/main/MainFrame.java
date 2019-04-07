@@ -9,8 +9,10 @@ import javax.swing.JFrame;
 import container.Element;
 import container.MonitoredArray;
 import graph.Line;
+import sorter.AlgoSorter;
 import sorter.BubbleSort;
 import sorter.MergeSort;
+import sorter.QuickSort;
 import sorter.SortTrier;
 
 @SuppressWarnings("serial")
@@ -53,14 +55,42 @@ public final class MainFrame extends JFrame {
             mf.update();
 
             // bubble sort
-            mf.sp.sort(new SortTrier(new BubbleSort<MonitoredArray>()));
+            // mf.sorts(0);
 
             // merge sort
-            mf.sp.sort(new SortTrier(new MergeSort<MonitoredArray>()));
+            // mf.sorts(1);
+
+            // quick sort
+            mf.sorts(2);
 
         } catch (IOException e) {
             System.err.println("IO Error. Exiting. ");
             System.exit(-1);
+        } finally {
+            System.out.println("Completed! ");
+        }
+    }
+
+    /**
+     * sort using the factory created sorting algorithm
+     * 
+     * @param i factory index
+     * @see sortFactory
+     */
+    private void sorts(int i) {
+        sp.sort(new SortTrier(sortFactory(i)));
+    }
+
+    private static AlgoSorter<MonitoredArray> sortFactory(int i) {
+        switch (i) {
+            case 0:
+            return new BubbleSort<MonitoredArray>();
+            case 1:
+            return new MergeSort<MonitoredArray>();
+            case 2:
+            return new QuickSort<MonitoredArray>();
+            default:
+            return null;
         }
     }
 }

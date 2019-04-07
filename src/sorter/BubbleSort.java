@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import container.Element;
 import container.MonitoredArray;
 
-public class BubbleSort<Arr extends ArrayList<Element>> implements Sorter<Element, Arr> {
+public class BubbleSort<Arr extends ArrayList<Element>> implements AlgoSorter<Arr> {
     @Override
     public Arr sort(Arr arr) {
         // end index
