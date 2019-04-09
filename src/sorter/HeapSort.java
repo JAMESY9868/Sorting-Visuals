@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import container.Element;
 import container.MonitoredArray;
-import main.Const;
 
 /**
  * @see <a href="https://www.geeksforgeeks.org/heap-sort/">(External Link)

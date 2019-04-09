@@ -11,6 +11,8 @@ import container.MonitoredArray;
 import graph.Line;
 import sorter.AlgoSorter;
 import sorter.BubbleSort;
+import sorter.CountingSort;
+import sorter.HeapSort;
 import sorter.MergeSort;
 import sorter.QuickSort;
 import sorter.SelectionSort;
@@ -65,7 +67,13 @@ public final class MainFrame extends JFrame {
             // mf.sorts(2);
 
             // selection sort
-            mf.sorts(3);
+            // mf.sorts(3);
+
+            // heap sort
+            // mf.sorts(4);
+
+            // counting sort
+            mf.sorts(5);
 
         } catch (IOException e) {
             System.err.println("IO Error. Exiting. ");
@@ -95,6 +103,10 @@ public final class MainFrame extends JFrame {
             return new QuickSort<MonitoredArray>();
             case 3:
             return new SelectionSort<MonitoredArray>();
+            case 4:
+            return new HeapSort<MonitoredArray>();
+            case 5:
+            return new CountingSort<MonitoredArray>();
             default:
             return null;
         }

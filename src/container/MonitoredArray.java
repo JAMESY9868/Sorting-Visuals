@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import graph.Line;
 import graph.Repainter;
@@ -22,6 +23,30 @@ public final class MonitoredArray extends ArrayList<Element> implements Repainte
 
         for (int i = 0; i < ali.size(); i++)
             add(new Element(ali.get(i), new Line(ali.get(i), i), this));
+    }
+
+    public MonitoredArray(ArrayList<Integer> ali, ArrayList<Element> meta) {
+        this(ali);
+        takeMeta(meta);
+    }
+
+    /**
+     * takes elements from ale and metadata from meta
+     * 
+     * @param c element info
+     * @param meta meta info
+     */
+    public MonitoredArray(Collection<Element> c, ArrayList<Element> meta) {
+        super(c);
+        takeMeta(meta);
+    }
+
+    public void takeMeta(ArrayList<Element> meta) {
+        if (meta.getClass() != getClass())
+            return;
+
+        nSwap = ((MonitoredArray) meta).getSwap();
+        nCompare = ((MonitoredArray) meta).getCompare();
     }
 
     /**

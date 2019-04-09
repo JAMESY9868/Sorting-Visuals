@@ -45,6 +45,26 @@ public class Element implements Comparable<Element>, Repainter {
         return cmp;
     }
 
+    public int compareTo(Integer item) {
+        // set color
+        final Color c = swapLineColor(C1);
+
+        // stores result
+        int cmp = this.item.compareTo(item);
+
+        // repaint
+        p.repaint();
+
+        // line repaints
+        swapLineColor(c);
+
+        // update counters
+        mai.compared();
+
+        // return
+        return cmp;
+    }
+
     public Color swapLineColor(Color c) {
         return line.swapColor(c);
     }
